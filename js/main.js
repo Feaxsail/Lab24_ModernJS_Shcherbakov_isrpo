@@ -151,3 +151,87 @@ console.log(defaultGreeting());
 console.log("Квадрат 6 =", MathModule.square(6));
 console.log("Куб 3 =", MathModule.cube(3));
 console.log("Число E =", MathModule.E);
+
+// ========== Промисы ==========
+console.log("\n=== Промисы ===");
+
+const simplePromise = new Promise((resolve, reject) => {
+  const success = true;
+  if (success) {
+    resolve("Операция выполнена успешно!");
+  } else {
+    reject("Произошла ошибка!");
+  }
+});
+
+simplePromise
+  .then((result) => console.log("Результат:", result))
+  .catch((error) => console.log("Ошибка:", error));
+
+function delay(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+delay(1000).then(() => console.log("Прошла 1 секунда"));
+
+function fetchUserData(userId) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (userId > 0) {
+        resolve({ id: userId, name: "Пользователь", age: 28 });
+      } else {
+        reject("ID пользователя должен быть положительным");
+      }
+    }, 1500);
+  });
+}
+
+fetchUserData(1)
+  .then((user) => console.log("Загружен пользователь:", user))
+  .catch((error) => console.log("Ошибка:", error));
+
+function step1(value) {
+  return new Promise((resolve) => {
+    setTimeout(() => resolve(value + 1), 500);
+  });
+}
+
+function step2(value) {
+  return new Promise((resolve) => {
+    setTimeout(() => resolve(value * 2), 500);
+  });
+}
+
+function step3(value) {
+  return new Promise((resolve) => {
+    setTimeout(() => resolve(value - 3), 500);
+  });
+}
+
+step1(5)
+  .then(step2)
+  .then(step3)
+  .then((result) => console.log("Результат цепочки:", result));
+
+//  Практическое задание 
+console.log("\n=== Практическое задание (Промисы) ===");
+
+function checkInventory(productName, inStock) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (inStock) {
+        resolve(`Товар "${productName}" есть в наличии.`);
+      } else {
+        reject(`Товар "${productName}" отсутствует.`);
+      }
+    }, 1000);
+  });
+}
+
+checkInventory("Смартфон", true)
+  .then((message) => console.log(message))
+  .catch((error) => console.error(error));
+
+checkInventory("Планшет", false)
+  .then((message) => console.log(message))
+  .catch((error) => console.error(error));
