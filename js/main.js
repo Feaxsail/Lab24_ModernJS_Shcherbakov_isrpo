@@ -134,3 +134,20 @@ const obj1 = { a: 1, b: 2 };
 const obj2 = { c: 3, d: 4 };
 const mergedObj = { ...obj1, ...obj2 };
 console.log("Объединённый объект:", mergedObj);
+
+// Модули 
+
+
+import { greet, add, multiply, PI } from './utils.js';
+import defaultGreeting from './utils.js';
+import * as MathModule from './math.js';
+
+console.log(greet("Анна"));
+console.log("5 + 3 =", add(5, 3));
+console.log("4 * 7 =", multiply(4, 7));
+console.log("PI =", PI);
+console.log(defaultGreeting());
+
+console.log("Квадрат 6 =", MathModule.square(6));
+console.log("Куб 3 =", MathModule.cube(3));
+console.log("Число E =", MathModule.E);
